@@ -4,7 +4,7 @@ import { getImages } from '../service/image-api.js'
 import ImageGallery from './ImageGallery/ImageGallery';
 import Button from "./Button/Button";
 import Loader from './Loader/Loader'
-import Modal from "./Modal/Modal";
+// import Modal from "./Modal/Modal";
 import css from './App.module.css'
 
 
@@ -34,7 +34,8 @@ export default class App extends Component{
           }
           this.setState(({ images }) => ({
             images: [...images, ...hits],
-            showLoadMore: page < Math.ceil(totalHits/15),
+            showLoadMore: page < Math.ceil(totalHits / 15),
+            largeImage: hits.largeImageUrl,
           }))
         }).finally(() => this.setState({loading: false}));
     } 
@@ -49,9 +50,9 @@ export default class App extends Component{
     this.setState(prevState => ({page: prevState.page + 1}))
   }
 
-  showModal = (url) => {
-    this.setState({largeImage: url})
-  }
+  // showModal = (url) => {
+  //   this.setState({largeImage: url})
+  // }
 
 
   render() {
@@ -59,11 +60,11 @@ export default class App extends Component{
     return (
       <div className={css.ImageFinder}>
         <Searchbar onSubmit={this.handleSubmit} />
-        <ImageGallery images={images} openModal={() => this.showModal()} />
+        <ImageGallery images={images} largeImage={largeImage} />
         {showLoadMore && <Button loadMore={this.handleLoadMore} />}
         {isEmpty  && <h1>Sorry, we didn't find any images... Try again!</h1>}
         {isLoading && <Loader />}
-        {largeImage && <Modal/>}
+        {/* {largeImage && <Modal onClose={this.showModal} largeImage={largeImage} />} */}
       </div> 
     );
   }
