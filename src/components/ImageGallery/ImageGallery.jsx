@@ -1,59 +1,52 @@
-import { Component } from 'react';
+// import { Component } from 'react';
 import css from './ImageGallery.module.css'
 import ImageGalleryItem from 'components/ImageGalleryItem/ImageGalleryItem';
-import Modal from 'components/Modal/Modal';
+// import Modal from 'components/Modal/Modal';
 
 
 
-export default class ImageGallery extends Component{
-    state = {
-        
-        images: [],
-        largeImage: '',
-    }
+// export default class ImageGallery extends Component{
+    
     
 
-    showModal = (url) => {
-        this.setState({largeImage: url})
-      }
-
-    render() {
-        const { images, largeImage } = this.state;
-        return (
-            <div>
-                <ul className={css.ImageGallery}>
-                {images.map(({ id, webformatURL, tags, largeImageURL }) => (
-                    <ImageGalleryItem
-                        id={id}
-                        url={webformatURL}
-                        alt={tags}
-                        bigImg={largeImageURL}
-                        openModal={() => this.showModal(largeImageURL)}
-                    />
-                ))}
-            </ul>
-        {largeImage && <Modal onClose={this.showModal} largeImage={largeImage} />}
-            </div>
-            
-     )
- }
-}
-
-// function ImageGallery({images, openModal}) {
-//     return (
-//         <ul className={css.ImageGallery}>
-//         {images.map(({ id, webformatURL, tags, largeImageURL }) => (
-//             <ImageGalleryItem
-//                 id={id}
-//                 url={webformatURL}
-//                 alt={tags}
-//                 bigImg={largeImageURL}
-                
-//             />
+//     render() {
+//         const { showModal } = this.props.showModal;
+//         const { images } = this.state;
+//         return (
+//             <div>
+//                 <ul className={css.ImageGallery}>
+//                 {images.map(({ id, webformatURL, tags, largeImageURL }) => (
+//                     <ImageGalleryItem
+//                         key={id}
+//                         url={webformatURL}
+//                         alt={tags}
+//                         largeImage={largeImageURL}
+//                         showModal={showModal}
+//                     />
+//                 ))}
+//             </ul>
         
-//         ))}
-//       </ul>
-//     )
+//             </div>
+            
+//      )
+//  }
 // }
 
-// export default ImageGallery;
+function ImageGallery({images, showModal}) {
+    return (
+        <ul className={css.ImageGallery}>
+        {images.map(({ id, webformatURL, tags, largeImageURL }) => (
+            <ImageGalleryItem
+                key={id}
+                url={webformatURL}
+                alt={tags}
+                largeImage={largeImageURL}
+                showModal={showModal}
+            />
+        
+        ))}
+      </ul>
+    )
+}
+
+export default ImageGallery;
