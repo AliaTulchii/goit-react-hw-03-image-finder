@@ -1,5 +1,5 @@
 import css from './ImageGalleryItem.module.css'
-// import Modal from 'components/Modal/Modal';
+import PropTypes from 'prop-types'
 
 function ImageGalleryItem({ url, alt, showModal, largeImage})  {
     const newLargeImage = {
@@ -17,5 +17,12 @@ function ImageGalleryItem({ url, alt, showModal, largeImage})  {
             </li>
     )
 }
+
+ImageGalleryItem.protoType = {
+    url: PropTypes.string.isRequired,
+    alt: PropTypes.string.isRequired,
+    largeImage: PropTypes.string.isRequired,
+    showModal: PropTypes.func.isRequired,
+  };
 
 export default ImageGalleryItem;
